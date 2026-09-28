@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --color-bg: #161310;
+  --color-surface: #221c17;
+  --color-raised: #2c261f;
+  --color-line: #423a32;
+  --color-fg: #f4ecdf;
+  --color-muted: #b3a394;
+  --color-wax: #e07a45;
+  --color-ink: #161310;
+  --color-paper: #f4ecdf;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    min-height: 100dvh;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  button, input, textarea, select {
+    font: inherit;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  input:not([type="checkbox"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 1rem;
+    color: var(--color-fg);
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    width: 100%;
+    min-height: 2.75rem;
+  }
+  textarea {
+    min-height: 5.5rem;
+    resize: vertical;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid color-mix(in oklab, var(--color-wax) 80%, white);
+    outline-offset: 1px;
+  }
+}
+
+.buehne-fallback {
+  background:
+    radial-gradient(80% 60% at 80% 0%, color-mix(in oklab, var(--color-wax) 32%, transparent), transparent 58%),
+    linear-gradient(165deg, var(--color-raised), var(--color-bg));
+}
+
+.titel-feld {
+  width: 12rem;
+  max-width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--color-fg);
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

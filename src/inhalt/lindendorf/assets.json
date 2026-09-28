@@ -1,0 +1,50 @@
+[
+  {
+    "id": "a-dorf",
+    "name": "Dorfplatz",
+    "typ": "hintergrund",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/dorfplatz.jpg",
+    "tags": ["ort", "abend"]
+  },
+  {
+    "id": "a-wirt",
+    "name": "Zum krummen Hirsch",
+    "typ": "hintergrund",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/wirtshaus.jpg",
+    "tags": ["ort", "innen"]
+  },
+  {
+    "id": "a-wald",
+    "name": "Waldrand",
+    "typ": "hintergrund",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/waldrand.jpg",
+    "tags": ["ort", "nacht"]
+  },
+  {
+    "id": "a-hilde",
+    "name": "Hilde",
+    "typ": "portrait",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/hilde.jpg",
+    "tags": ["npc", "wirtin"]
+  },
+  {
+    "id": "a-kaspar",
+    "name": "Kaspar",
+    "typ": "portrait",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/kaspar.jpg",
+    "tags": ["npc", "hehler"]
+  },
+  {
+    "id": "a-brief",
+    "name": "Versiegelter Brief",
+    "typ": "wissen",
+    "quelle": "paket",
+    "pfad": "/assets/lindendorf/brief.jpg",
+    "tags": ["item", "brief"]
+  }
+]

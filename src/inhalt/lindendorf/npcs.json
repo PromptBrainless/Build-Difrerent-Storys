@@ -1,0 +1,129 @@
+{
+  "npcs": [
+    {
+      "id": "n-hilde",
+      "name": "Hilde",
+      "portraitAssetId": "a-hilde",
+      "verhalten": "stationaer",
+      "dialogId": "d-hilde"
+    },
+    {
+      "id": "n-kaspar",
+      "name": "Kaspar",
+      "portraitAssetId": "a-kaspar",
+      "verhalten": "stationaer",
+      "dialogId": "d-kaspar"
+    }
+  ],
+  "dialoge": [
+    {
+      "id": "d-hilde",
+      "label": "hilde",
+      "zeilen": [
+        {
+          "id": "z-h1",
+          "sprecher": "Hilde",
+          "text": "Der Hirsch hat noch einen Tisch frei. Du siehst nicht aus, als wärst du wegen des Eintopfs hier, {name}.",
+          "variablen": [],
+          "choices": [
+            {
+              "id": "c-h-such",
+              "text": "Ich suche Kaspar, den Hehler.",
+              "naechsteId": "z-h2",
+              "ereignisIds": [],
+              "variablen": []
+            },
+            {
+              "id": "c-h-bett",
+              "text": "Nur ein Bett für die Nacht.",
+              "naechsteId": "z-h3",
+              "ereignisIds": [],
+              "variablen": []
+            }
+          ]
+        },
+        {
+          "id": "z-h2",
+          "sprecher": "Hilde",
+          "text": "Kaspar handelt nicht auf dem Platz. Hinter der Scheune, wo der Nebel anfängt. Er redet nur mit Leuten, die etwas riskieren. Dein Mut steht bei {mut}.",
+          "variablen": [{ "key": "auftrag", "wert": true }],
+          "choices": [
+            {
+              "id": "c-h-geh",
+              "text": "Dann gehe ich.",
+              "ereignisIds": ["ev-zum-wald"],
+              "variablen": []
+            },
+            {
+              "id": "c-h-bleib",
+              "text": "Ich trinke erst noch etwas.",
+              "ereignisIds": [],
+              "variablen": []
+            }
+          ]
+        },
+        {
+          "id": "z-h3",
+          "sprecher": "Hilde",
+          "text": "Unterm Dach, links. Falls du es dir anders überlegst: der Hehler wartet nicht bis zum Morgen.",
+          "variablen": [],
+          "choices": [
+            {
+              "id": "c-h-doch",
+              "text": "Doch. Wo ist Kaspar?",
+              "naechsteId": "z-h2",
+              "ereignisIds": [],
+              "variablen": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d-kaspar",
+      "label": "kaspar",
+      "zeilen": [
+        {
+          "id": "z-k1",
+          "sprecher": "Kaspar",
+          "text": "Kaspar mustert dich unter der Kapuze. „Geschäft oder Ärger, {name}?“",
+          "variablen": [],
+          "choices": [
+            {
+              "id": "c-k-stell",
+              "text": "Ein Brief, der dir gehört.",
+              "ereignisIds": ["ev-probe"],
+              "variablen": []
+            },
+            {
+              "id": "c-k-weg",
+              "text": "Weder noch.",
+              "ereignisIds": ["ev-zum-dorf"],
+              "variablen": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d-sieg",
+      "label": "kaspar_sieg",
+      "zeilen": [
+        {
+          "id": "z-s1",
+          "sprecher": "Kaspar",
+          "text": "Du hast nicht geblinzelt. Nimm den Brief. Und tu so, als hättest du mein Gesicht nie gesehen.",
+          "variablen": [],
+          "choices": [
+            {
+              "id": "c-s-nimm",
+              "text": "Ich nehme ihn.",
+              "ereignisIds": [],
+              "variablen": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

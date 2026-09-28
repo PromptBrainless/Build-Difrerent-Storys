@@ -1,0 +1,37 @@
+{
+  "kapitel": [{ "id": "k-prol", "name": "Prolog" }],
+  "gegenstaende": [
+    {
+      "id": "g-brief",
+      "name": "Versiegelter Brief",
+      "assetId": "a-brief",
+      "beschreibung": "Der Grund, warum du nach Lindendorf kamst."
+    }
+  ],
+  "quests": [
+    {
+      "id": "q-hehler",
+      "kapitelId": "k-prol",
+      "name": "Finde den Hehler",
+      "beschreibung": "Wirtin Hilde weiß, wo Kaspar handelt. Folge dem Pfad zum Waldrand und stelle ihn.",
+      "startBedingungen": [{ "art": "flag", "key": "auftrag", "op": "eq", "wert": true }],
+      "tasks": [
+        {
+          "id": "t-wald",
+          "beschreibung": "Den Waldrand erreichen",
+          "bedingung": { "art": "szene", "szeneId": "s-wald" }
+        },
+        {
+          "id": "t-kaspar",
+          "beschreibung": "Kaspar stellen",
+          "bedingung": { "art": "flag", "key": "gestellt", "op": "eq", "wert": true }
+        }
+      ],
+      "belohnung": { "items": ["g-brief"], "flags": [], "xp": 25 },
+      "startSzeneId": "s-dorf",
+      "zielSzeneIds": ["s-wald"],
+      "startNpcId": "n-hilde",
+      "abgabeNpcId": "n-kaspar"
+    }
+  ]
+}

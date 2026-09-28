@@ -1,0 +1,104 @@
+{
+  "startSzeneId": "s-dorf",
+  "szenen": [
+    {
+      "id": "s-dorf",
+      "name": "Dorfplatz",
+      "hintergrundAssetId": "a-dorf",
+      "beimBetreten": [],
+      "beimVerlassen": [],
+      "objekte": [
+        {
+          "id": "o-wirt",
+          "typ": "trigger",
+          "name": "Zum Hirsch",
+          "x": 56,
+          "y": 40,
+          "w": 34,
+          "h": 36,
+          "ereignisIds": ["ev-zum-wirt"]
+        },
+        {
+          "id": "o-gasse",
+          "typ": "trigger",
+          "name": "Gasse zum Wald",
+          "x": 4,
+          "y": 32,
+          "w": 30,
+          "h": 34,
+          "ereignisIds": ["ev-zum-wald"]
+        }
+      ]
+    },
+    {
+      "id": "s-wirt",
+      "name": "Zum krummen Hirsch",
+      "hintergrundAssetId": "a-wirt",
+      "beimBetreten": [],
+      "beimVerlassen": [],
+      "objekte": [
+        {
+          "id": "o-hilde",
+          "typ": "npc",
+          "name": "Hilde",
+          "x": 14,
+          "y": 36,
+          "w": 32,
+          "h": 44,
+          "referenzId": "n-hilde",
+          "ereignisIds": ["ev-hilde"]
+        },
+        {
+          "id": "o-platz",
+          "typ": "trigger",
+          "name": "Auf den Platz",
+          "x": 64,
+          "y": 54,
+          "w": 30,
+          "h": 32,
+          "ereignisIds": ["ev-zum-dorf"]
+        },
+        {
+          "id": "o-hinten",
+          "typ": "trigger",
+          "name": "Hintertür",
+          "x": 4,
+          "y": 10,
+          "w": 28,
+          "h": 30,
+          "ereignisIds": ["ev-zum-wald"]
+        }
+      ]
+    },
+    {
+      "id": "s-wald",
+      "name": "Waldrand",
+      "hintergrundAssetId": "a-wald",
+      "beimBetreten": [],
+      "beimVerlassen": [],
+      "objekte": [
+        {
+          "id": "o-kaspar",
+          "typ": "npc",
+          "name": "Kaspar",
+          "x": 46,
+          "y": 28,
+          "w": 32,
+          "h": 46,
+          "referenzId": "n-kaspar",
+          "ereignisIds": ["ev-kaspar"]
+        },
+        {
+          "id": "o-zurueck",
+          "typ": "trigger",
+          "name": "Zurück ins Dorf",
+          "x": 4,
+          "y": 58,
+          "w": 34,
+          "h": 30,
+          "ereignisIds": ["ev-zum-dorf"]
+        }
+      ]
+    }
+  ]
+}

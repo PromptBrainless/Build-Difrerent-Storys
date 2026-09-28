@@ -1,0 +1,10 @@
+[
+  {
+    "id": "p-mut",
+    "name": "Kaspar stellen",
+    "eigenschaft": "mut",
+    "schwierigkeit": 8,
+    "erfolgEreignisIds": ["ev-gestellt"],
+    "misserfolgEreignisIds": ["ev-flucht"]
+  }
+]

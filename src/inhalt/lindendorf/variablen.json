@@ -1,0 +1,30 @@
+[
+  {
+    "id": "v-name",
+    "name": "name",
+    "typ": "string",
+    "standard": "Fremde",
+    "beschreibung": "Wie die Geschichte dich anspricht."
+  },
+  {
+    "id": "v-mut",
+    "name": "mut",
+    "typ": "number",
+    "standard": 4,
+    "beschreibung": "Eigenschaft für Proben. Erfolg, wenn W10 + Wert ≥ Schwierigkeit."
+  },
+  {
+    "id": "v-auftrag",
+    "name": "auftrag",
+    "typ": "bool",
+    "standard": false,
+    "beschreibung": "Hilde hat den Pfad zum Hehler genannt."
+  },
+  {
+    "id": "v-gestellt",
+    "name": "gestellt",
+    "typ": "bool",
+    "standard": false,
+    "beschreibung": "Kaspar wurde gestellt."
+  }
+]

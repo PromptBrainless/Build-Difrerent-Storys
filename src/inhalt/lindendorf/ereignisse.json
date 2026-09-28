@@ -1,0 +1,24 @@
+[
+  { "id": "ev-zum-wirt", "name": "Zum Hirsch", "typ": "szene_wechsel", "zielSzeneId": "s-wirt", "folgeIds": [] },
+  { "id": "ev-zum-dorf", "name": "Zurück auf den Platz", "typ": "szene_wechsel", "zielSzeneId": "s-dorf", "folgeIds": [] },
+  { "id": "ev-zum-wald", "name": "Zum Waldrand", "typ": "szene_wechsel", "zielSzeneId": "s-wald", "folgeIds": [] },
+  { "id": "ev-hilde", "name": "Gespräch mit Hilde", "typ": "dialog", "npcId": "n-hilde", "dialogId": "d-hilde", "folgeIds": [] },
+  { "id": "ev-kaspar", "name": "Gespräch mit Kaspar", "typ": "dialog", "npcId": "n-kaspar", "dialogId": "d-kaspar", "folgeIds": [] },
+  { "id": "ev-probe", "name": "Kaspar stellen", "typ": "wuerfel", "probeId": "p-mut", "folgeIds": [] },
+  {
+    "id": "ev-gestellt",
+    "name": "Kaspar gestellt",
+    "typ": "flag_set",
+    "flagKey": "gestellt",
+    "flagWert": true,
+    "folgeIds": ["ev-sieg"]
+  },
+  { "id": "ev-sieg", "name": "Kaspar gibt nach", "typ": "dialog", "npcId": "n-kaspar", "dialogId": "d-sieg", "folgeIds": [] },
+  {
+    "id": "ev-flucht",
+    "name": "Kaspar weicht aus",
+    "typ": "custom",
+    "notiz": "Kaspar weicht aus und verschwindet zwischen den Birken. Du kannst es noch einmal versuchen.",
+    "folgeIds": []
+  }
+]

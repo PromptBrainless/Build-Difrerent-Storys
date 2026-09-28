@@ -1,0 +1,380 @@
+Re Herne nach Opensauce Inhalten die perfekt Aufgaben im Editor nehmen , dann plan Finale repo ,mit Editor-ui ergänzungb
+
+Perfekt – ich habe jetzt genug konkrete Open‑Source‑Referenzen, um daraus direkt nutzbare „Aufgaben‑Muster“ für deinen Editor abzuleiten und das finale Repo zu planen.
+
+***
+
+## 1) Open‑Source‑Inhalte, die sich perfekt als Editor‑Aufgaben eignen
+
+Ich extrahiere aus den Projekten konkrete, wiederverwendbare Muster für Szenen, Quests, NPCs, Ereignisse, Würfel/Proben.
+
+### A) GoNorth – Quest‑/Kapitel‑Planung als Node‑System
+
+**Was du übernehmen kannst:**
+
+- **Kapitel → Quests → Tasks** als Graph:
+  - Kapitel = großer Abschnitt der Story (z. B. „Prolog“, „Akt 1“)
+  - Quest = konkrete Aufgabe im Kapitel (z. B. „Finde den Hehler“, „Beschaffe Beweis“)
+  - Task = einzelner Schritt (z. B. „Sprich mit Wirt“, „Öffne Truhe“)
+- **Quest‑Status**:
+  - `nicht gestartet` / `aktiv` / `abgeschlossen` / `gescheitert`
+- **Verknüpfungen**:
+  - Quest ↔ Szene (Wo startet sie? Wo wird sie abgeschlossen?)
+  - Quest ↔ NPC (Wer gibt sie? Bei wem liefert man ab?)
+  - Quest ↔ Items (Was wird benötigt / belohnt?)
+
+**Als Editor‑Aufgabe formuliert:**
+
+- „Erstelle ein Node‑System für Kapitel → Quests → Tasks, mit:
+  - Start‑Bedingungen (Flag, Item, besuchte Szene)
+  - Abschluss‑Bedingungen (getötet, erreicht, Item abgegeben)
+  - Belohnungen (Items, Flags, XP)
+  - Verknüpfung zu Szenen, NPCs, Items.“
+
+Das passt exakt zu deinem Ziel „Quest ist Teil des Editors“.
+
+***
+
+### B) Tuesday‑JS – Szenen, Dialoge, Choices, Variablen
+
+**Was du übernehmen kannst:**
+
+- **Story Block → Scene → Dialog**‑Hierarchie:
+  - Story Block = nicht‑linearer Abschnitt (z. B. „Kapitel 1“)
+  - Scene = Hintergrund + Musik + Grundparameter
+  - Dialog = Text, Charaktername, Choices, Variablen‑Änderungen
+- **Choices**:
+  - Text
+  - Ziel‑Block / Ziel‑Szene
+  - Bedingungen (nur anzeigen, wenn Variable X ≥ Y)
+  - Aktionen beim Klick (Variable setzen, Sound abspielen)
+- **Variablen**:
+  - global, numerisch / boolisch / text
+  - Verwendung in Text (`<var_name>`), Bedingungen, Choices
+
+**Als Editor‑Aufgabe:**
+
+- „Baue einen Szenen‑Editor, der:
+  - Hintergrund, Musik, Farbe pro Szene setzt,
+  - Dialogzeilen mit Sprecher und Text verwaltet,
+  - Choices mit Ziel, Bedingung und Variablen‑Änderung erlaubt,
+  - Variablen‑Panel für globale Flags/Werte bereitstellt.“
+
+Das ist fast 1:1 dein „Szenen‑ + Dialog‑ + Entscheidungs‑Editor“.
+
+***
+
+### C) Pixi’VN / ink – narrative Skripte mit Labels & Choices
+
+**Was du übernehmen kannst:**
+
+- **Labels** als Abschnitte (`=== start ===`, `=== nice_meeting ===`)
+- **Choices** als verzweigende Pfade:
+  ```ink
+  * [Nice to meet you!]
+    -> nice_meeting
+  * [I'd rather not say.]
+    -> silent_response
+  ```
+- **Variablen / Charakter‑Namen**:
+  ```ink
+  # rename mc {_input_value_}
+  james: Nice to meet you, [mc]!
+  ```
+
+**Als Editor‑Aufgabe:**
+
+- „Implementiere ein narratives Skript‑Modell mit:
+  - Labels (Abschnitten),
+  - Choices (Verzweigungen),
+  - Variablen‑Referenzen im Text,
+  - optional: Hashtag‑Commands für Bilder/Animationen.“
+
+Das gibt dir eine kompakte, textbasierte Repräsentation, die der Editor sowohl grafisch als auch als JSON/TS abbilden kann.
+
+***
+
+### D) VoxelNovels – Welt als JSON (Terrain, NPCs, Events)
+
+**Was du übernehmen kannst:**
+
+- Weltbeschreibung rein als JSON:
+  - Terrain / Karten
+  - Gebäude / Orte
+  - NPC‑Platzierung
+  - Events (bei Betreten, bei Klick, zeitgesteuert)
+- AI‑generierte JSONs aus Textvorlagen (längerfristig interessant für „Auto‑Quest‑Generierung“).
+
+**Als Editor‑Aufgabe:**
+
+- „Erstelle einen Welt‑Editor, der:
+  - eine Karte (Hintergrundbild) lädt,
+  - Marker für Orte/NPCs/Events setzt,
+  - jedem Marker JSON‑Daten zuordnet (Szene, NPC, Event, Quest‑Start).“
+
+***
+
+## 2) Finales Repo‑Plan (mit Editor‑UI‑Ergänzungen)
+
+Jetzt kombiniere ich das mit deinem bestehenden Plan (Engine + Editor + Android) zu einem konkreten, schrittweisen Repo‑Plan.
+
+### Zielarchitektur (nochmal kompakt)
+
+```text
+build-you-story/
+  docs/
+    HERKUNFT.md
+    BESTANDSAUFNAHME.md
+    ENTSCHEIDUNGEN.md
+    ARCHITEKTUR.md
+  src/
+    lib/
+      types.ts          # Asset, Szene, NPC, Dialog, Quest, Ereignis, WuerfelProbe, SaveData
+      storage.ts        # Save/Load, LocalStorage / Filesystem‑Adapter
+      platform.ts       # Web vs. Android‑Adapter (Back‑Button, Gallery, Storage)
+    spiel/
+      runtime.ts        # Spielschleife, Szene‑Renderer, Input, Event‑Ausführung
+      engine/
+        scene.ts
+        npc.ts
+        dialog.ts
+        quest.ts
+        probe.ts
+    inhalt/
+      lindendorf/
+        assets.json
+        szenen.json
+        npcs.json
+        quests.json
+        ereignisse.json
+        proben.json
+    werkzeug/
+      editor/
+        EditorRoot.tsx          # Hauptview des Editors (Tabs / Panels)
+        asset-browser/
+        szenen-editor/
+        quest-editor/
+        npc-editor/
+        ereignis-editor/
+        proben-editor/
+        variablen-editor/
+      ui/
+        panels/                 # wiederverwendbare UI‑Komponenten
+        canvas/                 # Karten‑/Szenen‑Canvas
+  public/
+    assets/
+  capacitor.config.ts
+  package.json
+  vite.config.ts
+```
+
+***
+
+## 3) Editor‑UI‑Ergänzungen (konkrete Aufgaben)
+
+Ich formuliere jetzt konkrete, umsetzbare Tasks für den Agenten, basierend auf den Open‑Source‑Mustern.
+
+### Task 1 – Asset‑Browser (Galerie‑Upload)
+
+**Inspiration:** Tuesday‑JS (Arts, Charaktere), GoNorth (Items/NPCs mit Bildern)
+
+**Aufgabe:**
+
+- UI‑Panel „Assets“ im Editor:
+  - Liste aller Assets (Tabelle/Grid) mit:
+    - Vorschau‑Bild
+    - Name
+    - Typ (`hintergrund`, `portrait`, `wissen`, `sonstiges`)
+    - Quelle (`paket`, `lokal`, `url`)
+    - Tags
+  - Filter nach Typ/Tag
+  - Suchfeld
+- Upload:
+  - Web: `<input type="file" accept="image/*" />` + Drag‑&‑Drop‑Zone
+  - Android: Capacitor‑Plugin für Galerie/Dateisystem
+- Metadaten‑Editor:
+  - Name, Typ, Tags bearbeiten
+  - Pfad anzeigen/speichern
+
+**Ergebnis:**  
+Du kannst Bilder aus der Galerie/Dateisystem als Hintergrund, Portrait, Wissen etc. hinterlegen und im Editor wiederverwenden.
+
+***
+
+### Task 2 – Szenen‑Editor (Hintergrund, Objekte, Trigger)
+
+**Inspiration:** Tuesday‑JS (Scene + Art + Choices), VoxelNovels (Map + Marker)
+
+**Aufgabe:**
+
+- Canvas‑Ansicht für Szene:
+  - Hintergrundbild (Asset‑Auswahl)
+  - Platzierung von Objekten:
+    - NPCs
+    - Trigger (unsichtbare Bereiche)
+    - Items / interaktive Objekte
+  - Drag‑&‑Drop für Positionierung
+- Seiten‑Panel:
+  - Liste der Objekte in der Szene
+  - Pro Objekt:
+    - Typ (NPC, Trigger, Item)
+    - Referenz (NPC‑ID, Item‑ID)
+    - Ereignisse bei Interaktion (Liste von Ereignis‑IDs)
+- Szene‑Metadaten:
+  - Name
+  - Hintergrund‑Asset
+  - Ereignisse beim Betreten/Verlassen
+
+**Ergebnis:**  
+Du kannst Szenen visuell aufbauen und mit NPCs, Triggern und Ereignissen verknüpfen.
+
+***
+
+### Task 3 – Quest‑Editor (Kapitel → Quests → Tasks)
+
+**Inspiration:** GoNorth (Kapitel/Quests als Node‑System), Pixi’VN/ink (Choices als Pfade)
+
+**Aufgabe:**
+
+- Node‑basierte oder listenbasierte Ansicht:
+  - Kapitel (Gruppierung)
+  - Quests pro Kapitel
+  - Tasks pro Quest
+- Pro Quest:
+  - Name, Beschreibung
+  - Start‑Bedingungen (Flag, Item, besuchte Szene, NPC‑Gespräch)
+  - Tasks:
+    - Beschreibung
+    - Bedingung (Flag, Item, Szene, NPC)
+    - Ereignis bei Abschluss
+  - Belohnung (Items, Flags, XP)
+  - Verknüpfungen:
+    - Start‑Szene / Ziel‑Szenen
+    - Start‑NPC / Abgabe‑NPC
+- Status‑Tracking (für spätere Runtime):
+  - `nicht gestartet` / `aktiv` / `abgeschlossen` / `gescheitert`
+
+**Ergebnis:**  
+Du kannst Quests strukturiert planen und direkt mit Szenen, NPCs und Ereignissen verknüpfen.
+
+***
+
+### Task 4 – NPC‑Editor (Portrait, Dialoge, Verhalten)
+
+**Inspiration:** GoNorth (NPCs mit Dialog‑Nodes), Tuesday‑JS (Charaktere + Dialoge), Pixi’VN (Charaktere + ink‑Dialoge)
+
+**Aufgabe:**
+
+- NPC‑Liste + Detail‑Panel:
+  - Name
+  - Portrait‑Asset
+  - Verhalten (stationär, Patrol, custom)
+- Dialog‑Editor:
+  - Node‑basiert oder linear:
+    - Dialogzeile (Sprecher, Text)
+    - Choices (Spielerantworten)
+      - Text
+      - nächste Zeile / Label
+      - Ereignisse bei Auswahl
+  - Variablen‑Änderungen im Dialog (Flag setzen, Wert ändern)
+
+**Ergebnis:**  
+Du kannst NPCs mit Portrait und verzweigten Dialogen inkl. Choices und Variablen‑Logik erstellen.
+
+***
+
+### Task 5 – Ereignis‑Editor (Dialog, Würfel, Szene‑Wechsel, Flags)
+
+**Inspiration:** Tuesday‑JS (Events via Choices/Variablen), GoNorth (Export von Events/Skripten)
+
+**Aufgabe:**
+
+- Ereignis‑Typen:
+  - `dialog` (NPC, Start‑Dialog)
+  - `wuerfel` (Probe‑ID)
+  - `szene_wechsel` (Ziel‑Szene)
+  - `flag_set` (Key, Wert, Folge‑Ereignisse)
+  - `custom` (erweiterbar)
+- UI:
+  - Liste aller Ereignisse (global oder pro Szene/NPC)
+  - Formular pro Ereignis‑Typ
+  - Verknüpfung zu:
+    - Szenen
+    - NPCs
+    - Proben
+    - anderen Ereignissen (Kette)
+
+**Ergebnis:**  
+Du kannst komplexe Abläufe (Dialog → Würfel → Flag → Szene‑Wechsel) grafisch modellieren.
+
+***
+
+### Task 6 – Würfel/Proben‑Editor
+
+**Inspiration:** Open‑Source‑RPG‑Engines (Probe mit Eigenschaft + Schwierigkeit + Erfolg/Misserfolg)
+
+**Aufgabe:**
+
+- Liste aller Proben:
+  - Name
+  - Eigenschaft (z. B. „Mut“, „Geschick“, „Wissen“)
+  - Schwierigkeit (1–10)
+  - Erfolg‑Ereignisse
+  - Misserfolg‑Ereignisse
+- UI:
+  - Formular zum Anlegen/Bearbeiten
+  - Auswahl der verknüpften Ereignisse
+
+**Ergebnis:**  
+Du kannst regelbasierte Proben definieren, die der Editor und die Runtime nutzen.
+
+***
+
+### Task 7 – Variablen‑Editor (globale Flags / Werte)
+
+**Inspiration:** Tuesday‑JS (Variablen‑Panel, Bedingungen), Pixi’VN/ink (Variablen im Skript)
+
+**Aufgabe:**
+
+- Globale Variablen:
+  - Name, Typ (bool, number, string), Standardwert
+  - Beschreibung (optional)
+- Verwendung:
+  - In Dialogen (Text‑Interpolation)
+  - In Bedingungen (Choices, Events, Quest‑Schritte)
+  - In Quest‑Status (Abschluss‑Bedingungen)
+
+**Ergebnis:**  
+Du hast ein zentrales Panel für alle Flags/Werte, die die Story steuern.
+
+***
+
+## 4) Nächster konkreter Schritt
+
+Wenn du möchtest, schreibe ich dir im nächsten Schritt:
+
+- eine **priorisierte Task‑Liste** für den Agenten (Phase A–D),
+- plus eine **erste `types.ts`** mit allen Typen (Asset, Szene, NPC, Dialog, Quest, Ereignis, Probe, SaveData),
+- und ein **Beispiel‑JSON** für:
+  - eine Szene mit NPC + Dialog + Choice
+  - eine Quest mit Tasks + Belohnung
+  - eine Würfelprobe mit Erfolg/Misserfolg‑Ereignissen.
+
+Damit hättest du ein sofort umsetzbares Paket für den Coding‑Agenten.
+
+Quellen:
+[1] GitHub - diane1f0cd/VisualNovelTemplate: A simple template for web-based visual novels. Written in javascript, easily customizable. https://github.com/diane1f0cd/VisualNovelTemplate
+[2] GitHub - steffendx/GoNorth: GoNorth is a story and content planning tool for RPGs and other open world games. https://github.com/steffendx/GoNorth
+[3] GitHub - QueenChristina/gd_dialog: Open source robust dialogue system in Godot. Suitable for RPGs, visual novels, interactive fiction, and other games requiring dialogue. https://github.com/QueenChristina/gd_dialog
+[4] GitHub - binary-knight/usurper-reborn: Persistent text RPG where 60+ autonomous NPCs live, marry, and die 24/7 — whether you're playing or not. Inspired by Usurper (1993). https://github.com/binary-knight/usurper-reborn
+[5] GitHub - Kirilllive/tuesday-js: simple web-based, free and open-source visual novel editor that can be used in a web browser. It is written in JavaScript without using any third party libraries and thus does not require additional software installation. The engine uses standard HTML document elements such as div and img. This allows the use of any media format supported by browsers including vector graphics svg, gif animations and css styles. http://github.com/Kirilllive/tuesday-js
+[6] GitHub - mcp-tool-shop-org/ai-rpg-engine: Simulation-native toolkit ... https://github.com/mcp-tool-shop-org/ai-rpg-engine
+[7] Open-Source Narrative Engine for Visual Novels and Games https://www.linkedin.com/posts/enrique-za_from-dialogue-tool-to-full-narrative-engine-activity-7421465291299151872-FmoG
+[8] Pixi'VN - Visual Novel Engine for React, JavaScript & TypeScript https://pixi-vn.com/
+[9] How to Build a Visual Novel Without Code: The 2026 Guide https://storyflow-editor.com/blog/how-to-build-a-visual-novel-without-code/
+[10] Open-source Psycho-Connect Dialogue Editor for ... https://www.linkedin.com/posts/enrique-za_github-enrique-zapsycho-connect-dialogue-editor-activity-7420031697758412800-shmS
+[11] Tuesday JS visual novel engine Tutorial / Documentation / Lessons https://alxprd.github.io/tuesday-js/doc_editor.html
+[12] VoxelNovels — Your Story Becomes a World. https://voxelnovels.com/en/
+[13] LE Dialogue Editor by Levrault - itch.io https://levrault.itch.io/le-dialogue-editor
+[14] Visual Novel Script Builder by Mochi https://mochimochi95.itch.io/script-writer
+[15] RPGJS: Build RPGs with code, AI, or both https://rpgjs.dev/
